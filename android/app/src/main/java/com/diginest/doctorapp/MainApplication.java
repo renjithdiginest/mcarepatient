@@ -1,4 +1,4 @@
-package com.mcaredoctor;
+package com.diginest.doctorapp;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

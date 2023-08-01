@@ -86,8 +86,8 @@ const Today = ({ type }) => {
             showsVerticalScrollIndicator={false}
             pt={2}
             mb={100}
-            // refreshing={loading}
-            // onRefresh={getTodayConsult}
+            refreshing={loading}
+            onRefresh={getTodayConsult}
             ListEmptyComponent={() => <Box height={500} justifyContent="center" alignItems={"center"}>No Records Found</Box>}
         />
     )

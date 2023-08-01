@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useCallback } from 'react'
 import { ImageBackground, StyleSheet, useWindowDimensions } from "react-native";
 import { Box, Text, Image, Button, Icon, ScrollView, Pressable, HStack } from 'native-base'
 import CustomButton from '../../components/CustomButton';
@@ -55,6 +55,18 @@ const Op = ({ navigation }) => {
 
     const { width, height } = useWindowDimensions()
 
+    const setToday = useCallback(() => {
+        setCurrentTab(0)
+    }, [])
+
+    const setUpcoming = useCallback(() => {
+        setCurrentTab(1)
+    }, [])
+
+    const setOld = useCallback(() => {
+        setCurrentTab(2)
+    }, [])
+
 
     return (
 
@@ -66,17 +78,17 @@ const Op = ({ navigation }) => {
                 <HStack justifyContent={'center'} borderRadius={15} alignSelf='center' bg='#fff' mt={4}>
                     <CustomButton
                         label={"Today"}
-                        onPress={() => setCurrentTab(0)}
+                        onPress={setToday}
                         selected={currentTab === 0 ? true : false}
                     />
                     <CustomButton
                         label={"Upcoming"}
-                        onPress={() => setCurrentTab(1)}
+                        onPress={setUpcoming}
                         selected={currentTab === 1 ? true : false}
                     />
                     <CustomButton
                         label={"Old"}
-                        onPress={() => setCurrentTab(2)}
+                        onPress={setOld}
                         selected={currentTab === 2 ? true : false}
                     />
                 </HStack>

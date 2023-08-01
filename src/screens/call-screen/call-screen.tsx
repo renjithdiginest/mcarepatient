@@ -55,6 +55,7 @@ import {
   RNKeyboard,
   SoftInputMode,
 } from 'react-native-keyboard-area';
+import reactotron from 'reactotron-react-native';
 
 type CallScreenProps = {
   navigation: any;
@@ -104,12 +105,14 @@ export function CallScreen({navigation, route}: CallScreenProps) {
   useEffect(() => {
     (async () => {
       const {params} = route;
-      const token = await generateJwt(params.sessionName, params.roleType);
+
+      //reactotron.log({params})
+      //const token = await generateJwt(params.sessionName, params.roleType);
       try {
         await zoom.joinSession({
           sessionName: params.sessionName,
           sessionPassword: params.sessionPassword,
-          token: token,
+          token: params.token,
           userName: params.displayName,
           audioOptions: {
             connect: true,

@@ -25,6 +25,8 @@ import SplashScreen from "react-native-splash-screen";
 import reactotron from 'reactotron-react-native';
 import ViewPdf from '../screens/ViewPdf';
 import LoadingModal from '../components/LoadingModal';
+import { CallScreen } from '../screens/call-screen';
+import { JoinScreen } from '../screens/join-screen';
 
 
 
@@ -130,6 +132,9 @@ const Navigation = () => {
 					<Stack.Screen name="ReferProcedure" component={ReferProcedure} />
 					<Stack.Screen name="PatientHistory" component={PatientHistory} />
 					<Stack.Screen name="viewpdf" component={ViewPdf} />
+					<Stack.Screen name="Call" component={CallScreen} />
+					<Stack.Screen name="Join" component={JoinScreen} options={{title: ''}} />
+
 
 				</Stack.Navigator>
 			</NavigationContainer>

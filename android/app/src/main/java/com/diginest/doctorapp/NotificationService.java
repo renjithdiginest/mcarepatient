@@ -1,4 +1,4 @@
-package com.mcaredoctor;
+package com.diginest.doctorapp;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;

@@ -165,8 +165,8 @@ const Upcoming = ({type}) => {
                 showsVerticalScrollIndicator={false}
                 pt={2}
                 mb={170}
-                // refreshing={loading}
-                // onRefresh={getUpcomingConsultations}
+                refreshing={loading}
+                onRefresh={getUpcomingConsultations}
                 ListEmptyComponent={() => <Box height={400} justifyContent="center" alignItems={"center"}>No Records Found</Box>}
             />
 

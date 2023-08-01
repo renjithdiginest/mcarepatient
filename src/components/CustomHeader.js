@@ -31,7 +31,7 @@ const CustomHeader = ({ height }) => {
                             colorScheme="danger" rounded="full" mb={-2} mr={-2} zIndex={1} variant="solid" alignSelf="flex-end" _text={{
                                 fontSize:9
                             }}>{Notification?.notificationList}</Badge>
-                        <Ionicons name={"ios-notifications-sharp"} size={22} color={"#057EC1"} />
+                        <Ionicons name={"notifications"} size={22} color={"#057EC1"} />
                     </Pressable>
                 </HStack>
             </ImageBackground>

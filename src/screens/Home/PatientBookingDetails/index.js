@@ -1,4 +1,4 @@
-import { Linking, StyleSheet, TouchableOpacity, useWindowDimensions } from 'react-native'
+import { Linking, StyleSheet, TouchableOpacity, useWindowDimensions, Platform } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import CustomBackground from '../../../components/CustomBackground'
 import { Box, FlatList, HStack, Icon, Text, Pressable, ScrollView, useToast, Spinner, VStack } from 'native-base'
@@ -22,6 +22,35 @@ import { RESET, RESET_ERROR, SET_REFER_PROCEDURE, SET_REFER_SERVICE } from '../.
 import { PDF_URL } from '../../../config/constants'
 import CustomHeader from '../../../components/CustomHeader'
 import reactotron from 'reactotron-react-native'
+import { LOADING } from '../../../Redux/constants/authConstants'
+import { Axios } from 'axios'
+import customAxios from '../../../CustomeAxios'
+import {
+    checkMultiple,
+    requestMultiple,
+    openSettings,
+    PERMISSIONS,
+    RESULTS,
+    Permission,
+    PermissionStatus,
+  } from 'react-native-permissions';
+
+
+// TODO: Enable photo library permission when sharing view is done.
+const platformPermissions = {
+    ios: [
+      PERMISSIONS.IOS.CAMERA,
+      PERMISSIONS.IOS.MICROPHONE,
+      //PERMISSIONS.IOS.PHOTO_LIBRARY,
+    ],
+    android: [
+      PERMISSIONS.ANDROID.CAMERA,
+      PERMISSIONS.ANDROID.RECORD_AUDIO,
+      PERMISSIONS.ANDROID.BLUETOOTH_CONNECT,
+      PERMISSIONS.ANDROID.READ_PHONE_STATE,
+      PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+    ],
+  };
 
 
 const PatientBookingDetails = ({ navigation, route }) => {
@@ -31,15 +60,18 @@ const PatientBookingDetails = ({ navigation, route }) => {
     const { selectedServices, selectedProcedures, error, updateSuccess } = useSelector(state => state.home)
 
     const { activePatient, type } = route.params;
-
-    reactotron.log(type, 'typeeee')
     const [refer, showRefer] = useState(false)
     const [proc, showProc] = useState(false)
     const [servReport, showServReport] = useState(false)
     const [procReport, showProcReport] = useState(false)
 
+    const { user, loading } = useSelector(state => state.auth)
+
+
     const [referedService, setReferedServices] = useState([])
     const [referedProcedures, setReferedProcedures] = useState([])
+
+    reactotron.log({activePatient, user})
 
 
 
@@ -240,6 +272,79 @@ const PatientBookingDetails = ({ navigation, route }) => {
         setReferedProcedures(services)
     }
 
+
+    const startMeeting = async() => {
+        if (Platform.OS !== 'ios' && Platform.OS !== 'android') {
+            return;
+          }
+      
+          const permissions = platformPermissions[Platform.OS];
+          let blockedAny = false;
+          let notGranted= [];
+      
+          checkMultiple(permissions).then(
+            (statuses) => {
+              permissions.map((p) => {
+                const status = statuses[p];
+                if (status === RESULTS.BLOCKED) {
+                  blockedAny = true;
+                } else if (status !== RESULTS.GRANTED) {
+                  notGranted.push(p);
+                }
+              });
+              notGranted.length && requestMultiple(notGranted);
+              blockedAny && openSettings();
+            }
+        );
+        if(notGranted?.length === 0){
+            dispatch({
+                type: LOADING,
+                payload: true
+            })
+
+            try {
+                let data = {
+                    sessionName : activePatient?.zoomDetails?.sessionName,
+                    password: activePatient?.zoomDetails?.password,
+                    role_type: 1
+                }
+        
+                let res= await customAxios.post(`doctor/zoomTokenNew`, data);
+    
+                let token = res?.data?.data
+
+                reactotron.log({token})
+    
+                navigation.navigate('Call', {
+                    sessionName: activePatient?.zoomDetails?.sessionName,
+                    displayName: user?.name,
+                    sessionPassword: `${activePatient?.zoomDetails?.password}`,
+                    roleType: 1,
+                    sessionIdleTimeoutMins: '60',
+                    token
+                })
+                //navigation.navigate('Join')
+            } catch (error) {
+                
+            }
+            finally{
+                dispatch({
+                    type: LOADING,
+                    payload: false
+                })
+            }
+        }
+        else{
+            reactotron.log({notGranted})
+        }
+        
+
+        
+
+        
+        
+    }
+
     const renderItems = ({ item }) => {
         return (
             <AddedItemCard
@@ -398,12 +503,21 @@ const PatientBookingDetails = ({ navigation, route }) => {
                             options={AppointStatus}
                         />
 
+                        <HStack justifyContent={"space-around"}>
+                        {activePatient?.appointmenttype === "Online" && <CommonActionButton
+                            onPress={startMeeting}
+                            width={100} my={10} alignSelf='center'
+                        >
+                            <Text color={'#fff'} fontFamily='body' fontWeight={600} letterSpacing={0.5} fontSize={15} >Join</Text>
+                        </CommonActionButton>}
                         <CommonActionButton
                             onPress={handleSubmit(onConfirm)}
                             width={100} my={10} alignSelf='center'
                         >
-                            <Text color={'#fff'} fontFamily='body' fontWeight={600} letterSpacing={0.5} fontSize={15} >Confirm</Text>
-                        </CommonActionButton></>}
+                            <Text color={'#fff'} fontFamily='body' fontWeight={600} letterSpacing={0.5} fontSize={15} >Update</Text>
+                        </CommonActionButton>
+                        </HStack>
+                        </>}
                 </ScrollView>
 
             </Box>

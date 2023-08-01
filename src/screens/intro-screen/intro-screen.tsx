@@ -30,6 +30,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
+import SplashScreen from 'react-native-splash-screen';
 
 const introImages = [
   /* TODO: Hide for now since we do not support other rendering methods.
@@ -70,7 +71,12 @@ export function IntroScreen({ navigation }: Props) {
   const introIndex = useSharedValue<number>(0);
   const zoom = useZoom();
 
+
+  
+  
+
   useEffect(() => {
+    
     if (Platform.OS !== 'ios' && Platform.OS !== 'android') {
       return;
     }

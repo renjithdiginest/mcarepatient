@@ -13,6 +13,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as RootNavigation from './Navigations/RootNavigation'
 import RouteProvider from './helpers/Route/RouteContext'
 import NotificationProvider from './helpers/Notification/NotificationContext'
+import {ZoomVideoSdkProvider} from '@zoom/react-native-videosdk';
+
+
 
 const App = () => {
 
@@ -143,7 +146,14 @@ const App = () => {
 			<NativeBaseProvider theme={theme} config={config}>
 				<Provider store={store}>
 					<NotificationProvider>
-						<Navigation />
+						<ZoomVideoSdkProvider
+							config={{
+							appGroupId: 'group.test.sdk',
+							domain: 'zoom.us',
+							enableLog: true,
+							}}>
+							<Navigation />
+						</ZoomVideoSdkProvider>
 					</NotificationProvider>
 				</Provider>
 			</NativeBaseProvider>

@@ -153,8 +153,8 @@ const Completed = ({ type }) => {
                 pt={2}
                 mb={170}
                 ListEmptyComponent={() => <Box height={400} justifyContent="center" alignItems={"center"}>No Records Found</Box>}
-            // refreshing={loading}
-            // onRefresh={getCompletedConsult}
+                refreshing={loading}
+                onRefresh={getCompletedConsult}
             />
         </>
     )

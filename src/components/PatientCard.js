@@ -1,5 +1,5 @@
 import { StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { memo, useCallback } from 'react'
 import { Box, Text, Image, Button, Icon, ScrollView, Pressable, HStack } from 'native-base'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { SET_ACTIVE_PATIENT } from '../Redux/constants/homeConstants'
@@ -14,26 +14,23 @@ import reactotron from 'reactotron-react-native'
 
 const PatientCard = ({ item, type }) => {
 
-
-    reactotron.log({item})
-
     const dispatch = useDispatch();
     const navigation = useNavigation();
 
    
 
 
-    const makeActivePatient = (item) => {
+    const makeActivePatient = useCallback(() => {
         dispatch({
             type: SET_ACTIVE_PATIENT,
             payload: item
         })
         navigation.navigate('PatientBookingDetails', { activePatient: item, type: type })
-    }
+    }, [item, type])
 
     return (
         <TouchableOpacity
-            onPress={() => makeActivePatient(item)}
+            onPress={makeActivePatient}
         >
             <Box bg={"white"} borderRadius={30} mb={4}>
                 <HStack p={1} >
@@ -116,6 +113,6 @@ const PatientCard = ({ item, type }) => {
     )
 }
 
-export default PatientCard
+export default memo(PatientCard) 
 
 const styles = StyleSheet.create({})

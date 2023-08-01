@@ -1,5 +1,5 @@
 import { StyleSheet, useWindowDimensions } from 'react-native'
-import React from 'react'
+import React, { memo } from 'react'
 import { HStack, Pressable, Text, Icon, Box } from 'native-base'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
@@ -31,7 +31,7 @@ const CustomButton = ({ label, onPress, selected, wid, h }) => {
   )
 }
 
-export default CustomButton
+export default memo(CustomButton) 
 
 const styles = StyleSheet.create({
 

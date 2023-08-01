@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
 const CustomBackground = ({children}) => {
 
@@ -9,7 +10,7 @@ const CustomBackground = ({children}) => {
   )
 }
 
-export default CustomBackground
+export default memo(CustomBackground) 
 
 const styles = StyleSheet.create({
  

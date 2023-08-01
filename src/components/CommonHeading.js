@@ -1,5 +1,5 @@
 import { StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { memo } from 'react'
 import { HStack, Text, Pressable, Image, Box } from 'native-base'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
@@ -16,6 +16,6 @@ const CommonHeading = ({ label, goBack, px, height, width }) => {
     )
 }
 
-export default CommonHeading    
+export default memo(CommonHeading)     
 
 const styles = StyleSheet.create({})
