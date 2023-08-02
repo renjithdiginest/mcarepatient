@@ -56,6 +56,7 @@ import {
   SoftInputMode,
 } from 'react-native-keyboard-area';
 import reactotron from 'reactotron-react-native';
+import { useWakeLock } from 'react-screen-wake-lock';
 
 type CallScreenProps = {
   navigation: any;
@@ -63,6 +64,13 @@ type CallScreenProps = {
 };
 
 export function CallScreen({navigation, route}: CallScreenProps) {
+  const { isSupported, released, request, release } = useWakeLock({
+    onRequest: () => alert('Screen Wake Lock: requested!'),
+    onError: () => alert('An error happened 💥'),
+    onRelease: () => alert('Screen Wake Lock: released!'),
+  });
+
+
   const [isInSession, setIsInSession] = useState(false);
   const [sessionName, setSessionName] = useState('');
   const [users, setUsersInSession] = useState<ZoomVideoSdkUser[]>([]);
@@ -101,6 +109,16 @@ export function CallScreen({navigation, route}: CallScreenProps) {
   const [isReceiveSpokenLanguageContentEnabled, setIsReceiveSpokenLanguageContentEnabled] = useState(false);
   let touchTimer: NodeJS.Timeout;
   isLongTouchRef.current = isLongTouch;
+
+
+  // useEffect(() => {
+  //   request()
+  
+  //   return () => {
+  //     release()
+  //   }
+  // }, [])
+  
 
   useEffect(() => {
     (async () => {

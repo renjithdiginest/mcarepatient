@@ -56,7 +56,7 @@ const errorHandler = async error => {
             err = "Network Error"
         }
         else{
-            err = JSON.stringify(error?.response?.data?.message)
+            err = error?.response?.data?.message
         }
         
         /*if(error.response.status === 403){

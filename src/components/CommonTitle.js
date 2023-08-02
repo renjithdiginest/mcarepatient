@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import React from 'react'
+import React, { memo } from 'react'
 import { Text } from 'native-base'
 
 const CommonTitle = ({label, mt}) => {
@@ -10,6 +10,6 @@ const CommonTitle = ({label, mt}) => {
     )
 }
 
-export default CommonTitle
+export default memo(CommonTitle) 
 
 const styles = StyleSheet.create({})

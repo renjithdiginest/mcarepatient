@@ -29,6 +29,49 @@
             {
               "client_id": "1015851660184-ttutudcakt0dderlsrd9q51dl3oefni7.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1015851660184-kk6oq0u7f5kc08d35f5aopjg83rlht7o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.diginest.doctorapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015851660184:android:ba472840c8a37b67cef1ed",
+        "android_client_info": {
+          "package_name": "com.diginest.mcarepatient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1015851660184-ttutudcakt0dderlsrd9q51dl3oefni7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQeV0V08SzL06FdcJvk3KzZ9nT0g5Wa68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1015851660184-ttutudcakt0dderlsrd9q51dl3oefni7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1015851660184-kk6oq0u7f5kc08d35f5aopjg83rlht7o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.diginest.doctorapp"
+              }
             }
           ]
         }

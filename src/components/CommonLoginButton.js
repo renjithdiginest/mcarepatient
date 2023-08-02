@@ -1,11 +1,10 @@
 import { StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { memo } from 'react'
 import { Box, Pressable, Image } from 'native-base'
 
 const CommonLoginButton = ({ onPress, width,mt }) => {
     return (
-        <TouchableOpacity onPress={onPress}
-        >
+        <TouchableOpacity onPress={onPress}>
             <Box borderRadius={10}
                mt={mt}
                 alignItems={'center'} justifyContent='center'
@@ -24,6 +23,6 @@ const CommonLoginButton = ({ onPress, width,mt }) => {
     )
 }
 
-export default CommonLoginButton
+export default memo(CommonLoginButton) 
 
 const styles = StyleSheet.create({})

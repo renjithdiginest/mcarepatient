@@ -1,29 +1,21 @@
 import {
-    COMPLETED_CONSULTATION_FAIL,
-    COMPLETED_CONSULTATION_SUCCESS,
-    CONSUTATION_FILTER_FAIL,
-    CONSUTATION_FILTER_SUCCESS,
-    DEPT_BASED_CATEGORY_FAIL,
-    DEPT_BASED_CATEGORY_SUCCESS,
-    DEPT_CATEGORY_LIST_FAIL,
-    DEPT_CATEGORY_LIST_SUCCESS,
-    PATIENT_HISTORY_FAIL,
-    PATIENT_HISTORY_SUCCESS,
-    PROCEDURE_BASED_DEPT_FAIL,
-    PROCEDURE_BASED_DEPT_SUCCESS,
+    CONSULTATION_BOOKING_FAIL,
+    CONSULTATION_BOOKING_SUCCESS,
+    DEPT_LIST_FAIL,
+    DEPT_LIST_SUCCESS,
+    DOCTOR_LIST_BASED_DEPT_FAIL,
+    DOCTOR_LIST_BASED_DEPT_SUCCESS,
+    GET_BLOG_FAIL,
+    GET_BLOG_SUCCESS,
+    GET_SINGLE_BLOG_FAIL,
+    GET_SINGLE_BLOG_SUCCESS,
     RESET,
     RESET_ERROR,
-    SERVICE_BASED_DEPT_FAIL,
-    SERVICE_BASED_DEPT_SUCCESS,
-    SET_ACTIVE_PATIENT,
-    SET_REFER_PROCEDURE,
-    SET_REFER_SERVICE,
-    TODAY_CONSULTATION_FAIL,
-    TODAY_CONSULTATION_SUCCESS,
-    UPCOMING_CONSULTATION_FAIL,
-    UPCOMING_CONSULTATION_SUCCESS,
-    UPDATE_CONSULTATION_FAIL,
-    UPDATE_CONSULTATION_SUCCESS
+    SET_ACTIVE_DEPT,
+    SET_ACTIVE_DOCTOR,
+    SET_DATE_TIME_TYPE,
+    UPCOMING_APPOINTMENT_FAIL,
+    UPCOMING_APPOINTMENT_SUCCESS,
 } from "../constants/homeConstants"
 
 export const homeReducer = (state = {}, action) => {
@@ -38,161 +30,98 @@ export const homeReducer = (state = {}, action) => {
             return {
                 ...state,
                 error: null,
-                updateSuccess: null,
-                selectedServices: null,
-                selectedProcedures: null
+             
             }
-
-        case TODAY_CONSULTATION_SUCCESS:
+        case DEPT_LIST_SUCCESS:
             return {
                 ...state,
-                todayConsultList: action.payload,
+                deptList: action.payload,
             }
 
-        case TODAY_CONSULTATION_FAIL:
+        case DEPT_LIST_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-
-        case UPCOMING_CONSULTATION_SUCCESS:
+        case SET_ACTIVE_DEPT:
             return {
                 ...state,
-                upcomingConsultList: action.payload,
+                activeDept: action.payload,
             }
 
-        case UPCOMING_CONSULTATION_FAIL:
+        case SET_ACTIVE_DOCTOR:
             return {
                 ...state,
-                error: action.payload
+                activeDoctor: action.payload,
             }
 
-        case COMPLETED_CONSULTATION_SUCCESS:
+        case SET_DATE_TIME_TYPE:
             return {
                 ...state,
-                completedConsultList: action.payload,
+                dateTimeType: action.payload,
             }
+    
 
-        case COMPLETED_CONSULTATION_FAIL:
+        case UPCOMING_APPOINTMENT_SUCCESS:
             return {
                 ...state,
-                error: action.payload
+                upcomAppointList: action.payload,
             }
 
-        case CONSUTATION_FILTER_SUCCESS:
-            return {
-                ...state,
-                filter: action.payload,
-            }
-
-
-        case SET_ACTIVE_PATIENT:
-            return {
-                ...state,
-                activePatient: action.payload
-            }
-
-        case PATIENT_HISTORY_SUCCESS:
-            return {
-                ...state,
-                patientHistory: action.payload,
-            }
-
-        case PATIENT_HISTORY_FAIL:
+        case UPCOMING_APPOINTMENT_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-
-        case CONSUTATION_FILTER_FAIL:
+        case GET_BLOG_SUCCESS:
+            return {
+                ...state,
+                blogList: action.payload
+            }
+        case GET_BLOG_FAIL:
             return {
                 ...state,
                 error: action.payload
+
             }
 
-        case DEPT_CATEGORY_LIST_SUCCESS:
-            return {
-                ...state,
-                deptCatList: action.payload,
-            }
+            
+    case GET_SINGLE_BLOG_SUCCESS:
+        return {
+            ...state,
+            singleBlogList: action.payload
+        }
+    case GET_SINGLE_BLOG_FAIL:
+        return {
+            ...state,
+            error: action.payload
+        }
 
-        case DEPT_CATEGORY_LIST_FAIL:
-            return {
-                ...state,
-                error: action.payload
-            }
+    case DOCTOR_LIST_BASED_DEPT_SUCCESS:
+        return {
+            ...state,
+            doctorListUnderDept: action.payload
+        }
+    case DOCTOR_LIST_BASED_DEPT_FAIL:
+        return {
+            ...state,
+            error: action.payload
+        }
 
-        case DEPT_BASED_CATEGORY_SUCCESS:
-            return {
-                ...state,
-                deptBasedCategory: action.payload,
-            }
-
-        case DEPT_BASED_CATEGORY_FAIL:
-            return {
-                ...state,
-                error: action.payload
-            }
-
-        case SERVICE_BASED_DEPT_SUCCESS:
-            return {
-                ...state,
-                serviceBasedDept: action.payload,
-            }
-
-        case SERVICE_BASED_DEPT_FAIL:
-            return {
-                ...state,
-                error: action.payload
-            }
-
-        case PROCEDURE_BASED_DEPT_SUCCESS:
-            return {
-                ...state,
-                procedureBasedDept: action.payload,
-            }
-
-        case PROCEDURE_BASED_DEPT_FAIL:
-            return {
-                ...state,
-                error: action.payload
-            }
-
-
-        case SET_REFER_SERVICE:
-            return {
-                ...state,
-                selectedServices: action.payload,
-            }
-
-        case SET_REFER_PROCEDURE:
-            return {
-                ...state,
-                selectedProcedures: action.payload,
-            }
-
-        case UPDATE_CONSULTATION_SUCCESS:
-            return {
-                ...state,
-                
-                updatedConsultation: action.payload,
-                updateSuccess: true,
-            }
-
-        case UPDATE_CONSULTATION_FAIL:
-            return {
-                ...state,
-                error: action.payload
-            }
-
-
-
-
-
-
-
+    case CONSULTATION_BOOKING_SUCCESS:
+        return {
+            ...state,
+            booking: action.payload,
+            bookingSuccess : true
+        }
+    case CONSULTATION_BOOKING_FAIL:
+        return {
+            ...state,
+            error: action.payload
+        }    
+    
 
 
         default:

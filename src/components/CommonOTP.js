@@ -1,10 +1,10 @@
 import { StyleSheet, useWindowDimensions } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import { Box, Image, Text, Input, Icon, HStack, ScrollView } from 'native-base'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { Controller } from 'react-hook-form'
 import OTPInputView from '@twotalltotems/react-native-otp-input'
-const CommonOTP = ({control, fieldName, error}) => {
+const CommonOTP = ({control, fieldName, error,otpref}) => {
     return (
         <>
             <Controller
@@ -19,11 +19,13 @@ const CommonOTP = ({control, fieldName, error}) => {
                         code={value} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
                         onCodeChanged={onChange}
                         autoFocusOnLoad={false}
+                        ref={otpref}
                         codeInputFieldStyle={styles.underlineStyleBase}
                         codeInputHighlightStyle={styles.underlineStyleHighLighted}
                         onCodeFilled={(code) => {
                             // console.log(`Code is ${code}, you are good to go!`)
                         }}
+                        keyboardType='phone-pad'
                     />
 
                 )}
@@ -35,7 +37,7 @@ const CommonOTP = ({control, fieldName, error}) => {
     )
 }
 
-export default CommonOTP
+export default memo(CommonOTP)
 
 const styles = StyleSheet.create({
     borderStyleBase: {

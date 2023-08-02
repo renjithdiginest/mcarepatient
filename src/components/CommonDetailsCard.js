@@ -1,24 +1,24 @@
 import { StyleSheet, useWindowDimensions } from 'react-native'
-import React, {useState} from 'react'
+import React, {memo, useState} from 'react'
 import { Box, Text, HStack, Pressable, Icon, Image, useToast, Modal, ScrollView, Avatar } from 'native-base'
 
-const CommonDetailsCard = ({label, data, mt}) => {
+const CommonDetailsCard = ({label, data, mt, bg, textColor}) => {
   return (
     <Box mt={mt} >
         <Text 
-            color={'#444444'} fontWeight={700} fontFamily="body" fontSize={17} 
+            color={'#444444'} fontWeight={700} fontFamily="body" fontSize={16} 
         >{label}</Text>
         <Box  
-            borderRadius={10} bg='#EFEFEF' justifyContent={'center'} minH={43}
+            borderRadius={10} bg={bg ? bg : '#FAFAFA'} justifyContent={'center'} minH={43}
         >
             <Text 
-                color={'#444444'} fontWeight={600} fontFamily="body" fontSize={14} ml={3}
+                color={ textColor ? textColor : '#444444'} fontWeight={600} fontFamily="body" fontSize={12} ml={3}
             >{data}</Text>
         </Box>
     </Box>
   )
 }
 
-export default CommonDetailsCard
+export default memo(CommonDetailsCard) 
 
 const styles = StyleSheet.create({})

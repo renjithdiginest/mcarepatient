@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { memo } from 'react'
 import CustomLogo from './CustomLogo'
 import { Box, HStack, Pressable, StatusBar } from 'native-base'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -29,6 +29,6 @@ const CustomBlogHeader = () => {
   )
 }
 
-export default CustomBlogHeader
+export default memo(CustomBlogHeader) 
 
 const styles = StyleSheet.create({})

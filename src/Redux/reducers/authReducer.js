@@ -1,11 +1,12 @@
 import {
     AUTH_INPUT,
-    AUTH_STORE_SUCCESS,
-    LOADING, LOGIN_FAIL, LOGIN_SUCCESS, MOBILE_REG_FAIL, MOBILE_REG_SUCCESS, RESET_AUTH, RESET_ERROR
+    BASE_IMAGE_URL,
+    BASE_URL,
+    LOADING, LOGIN_FAIL, LOGIN_SUCCESS, MOBILE_REG_FAIL, MOBILE_REG_SUCCESS, MOBILE_STORE_SUCCESS, PRIVATE_USER, RESET_AUTH, RESET_ERROR
 } from "../constants/authConstants";
 
 
-export const authReducer = (state = { loading: false }, action) => {
+export const authReducer = (state = {}, action) => {
     switch (action.type) {
         case RESET_ERROR:
             return {
@@ -22,7 +23,7 @@ export const authReducer = (state = { loading: false }, action) => {
         case LOGIN_SUCCESS:
             return {
                 ...state,
-                user:action.payload,
+                user: action.payload,
                 loginSuccess: true,
             }
 
@@ -32,7 +33,7 @@ export const authReducer = (state = { loading: false }, action) => {
                 error: action.payload
             }
 
-        case AUTH_STORE_SUCCESS:
+        case MOBILE_STORE_SUCCESS:
             return {
                 ...state,
                 mobileNumber: action.payload
@@ -51,11 +52,22 @@ export const authReducer = (state = { loading: false }, action) => {
             }
 
         case AUTH_INPUT:
-            return{
+            return {
                 ...state,
-                [action.payload.prop] : action.payload.value
+                [action.payload.prop]: action.payload.value
             }
-            
+        case PRIVATE_USER:
+            return {
+                ...state,
+                privateUser: action.payload
+            }
+        case BASE_IMAGE_URL:
+            return {
+                ...state,
+                baseImageUrl: action.payload
+            }
+
+
         default:
             return state;
     }

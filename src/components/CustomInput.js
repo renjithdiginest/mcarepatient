@@ -1,10 +1,9 @@
 import { StyleSheet, useWindowDimensions } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import { Box, Image, Text, Input, Icon, HStack, ScrollView } from 'native-base'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { Controller } from 'react-hook-form'
-const CustomInput
-    = ({ placeholder, leftIconName, inputType, bottomRadius, topRadius, paddingLeft, rightIconBg, control, fieldName, error, bgColor, placeHoldeColor, leftIconColor, leftElementBg, inputColor, width, keyboardType }) => {
+const CustomInput  = ({ placeholder, leftIconName, inputType, bottomRadius, topRadius, paddingLeft, rightIconBg, control, fieldName, error, bgColor, placeHoldeColor, leftIconColor, leftElementBg, inputColor, width, keyboardType }) => {
 
         const [show, setShow] = useState(true)
         const handleClick = () => setShow(!show);
@@ -58,12 +57,12 @@ const CustomInput
                     )}
                     name={fieldName}
                 />
-                {error && <Text fontFamily={"body"} fontWeight={500} color={"red.500"} fontSize={11}>{error?.message}</Text>}
+                {error && <Text fontFamily={"Quicksand"} letterSpacing={.5} fontWeight={600}  color={"red.500"} fontSize={12} ml={1} mt={.5} >{error?.message}</Text>}
             </>
         )
     }
 
-export default CustomInput
+export default memo(CustomInput) 
 
 
 const styles = StyleSheet.create({})

@@ -1,7 +1,9 @@
 import { StyleSheet, useWindowDimensions, } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import { Box, HStack, Text, useToast, Icon, Avatar, Image, Pressable } from 'native-base'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { useDispatch, useSelector } from 'react-redux';
+import pic from "../images/user.jpeg"
 const CommonImageUploader = ({ onpress, children, label, galleryImg, preview, DocLabel, DeptLabel }) => {
     const [image, setImage] = useState('');
 
@@ -33,14 +35,14 @@ const CommonImageUploader = ({ onpress, children, label, galleryImg, preview, Do
                         />
                     </Pressable>
                 </Box>
-                <Text mt={1} color={'#444444'} opacity={70} letterSpacing={1} fontSize={14}>Docter ID : DOC{DocLabel}</Text>
-                <Text mt={.2} color={'#444444'} opacity={70} letterSpacing={1} fontSize={14}>Department : {DeptLabel}</Text>
+                <Text mt={1} color={'#444444'} opacity={70} letterSpacing={1} fontSize={14}>{DocLabel}</Text>
+                <Text mt={.2} color={'#444444'} opacity={70} letterSpacing={1} fontSize={14}>Patient ID: {DeptLabel}</Text>
 
             </Box>
         </>
     )
 }
 
-export default CommonImageUploader
+export default memo(CommonImageUploader) 
 
 const styles = StyleSheet.create({})

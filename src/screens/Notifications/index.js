@@ -1,25 +1,28 @@
-import { StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import React, { useContext, useEffect, useState } from 'react';
-import CustomBackground from '../../components/CustomBackground';
-import { Box, FlatList, Spinner } from 'native-base';
-import CommonHeading from '../../components/CommonHeading';
-import { useDispatch, useSelector } from 'react-redux';
-import customAxios from '../../CustomeAxios';
-import NotificationCard from './NotificationCard';
-import { LOADING } from '../../Redux/constants/authConstants';
-import NotificationContext from '../../helpers/Notification';
-import reactotron from 'reactotron-react-native';
+import { StyleSheet, Text, useWindowDimensions, View } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
+import CustomBackground from '../../components/CustomBackground'
+import { Box, FlatList, Spinner } from 'native-base'
+import CommonHeading from '../../components/CommonHeading'
+import { useDispatch, useSelector } from 'react-redux'
+import customAxios from '../../CustomeAxios'
+import NotificationCard from './NotificationCard'
+import { LOADING } from '../../Redux/constants/authConstants'
+import reactotron from 'reactotron-react-native'
+import NotificationContext from '../../context/Notification'
+
 
 const Notifications = ({ navigation }) => {
-    const dispatch = useDispatch()
+
     const { height, width } = useWindowDimensions()
-    const { user, loading } = useSelector(state => state.auth)
-    const notiContext = useContext(NotificationContext);
+
+    const dispatch = useDispatch()
+    const Notification = useContext(NotificationContext)
     const [notifications, setNotifications] = useState([])
 
+    const { user, loading } = useSelector(state => state.auth)
 
 
-    reactotron.log({notifications})
+
 
     useEffect(() => {
         getNotificationsList()
@@ -31,10 +34,13 @@ const Notifications = ({ navigation }) => {
             payload: true
         })
 
+        
+
         let data = {
-            doctor_id : user?._id
+            user_id : user?._id
         }
-        await customAxios.post(`doctor/notifications`, data)
+
+        await customAxios.post(`patient/notifications`, data)
             .then(async response => {
                 setNotifications(response?.data?.data)
                 dispatch({
@@ -55,7 +61,7 @@ const Notifications = ({ navigation }) => {
         let data = {
             id : id
         }
-        await customAxios.post(`doctor/update-notification`, data)
+        await customAxios.post(`patient/update-notification`, data)
         .then(async response => {
             setNotifications((prev) => prev.map(no => {
                 if(no._id === id){
@@ -75,11 +81,10 @@ const Notifications = ({ navigation }) => {
     }
 
 
-    
     useEffect(()=>{
-        if(notifications.length > 0){
+        if(notifications){
             let noti = notifications.filter((res)=>res?.status === 'unread')
-            notiContext.setNotificationList(noti?.length)
+            Notification.setNotificationList(noti?.length)
         }
     },[notifications])
 
@@ -94,14 +99,13 @@ const Notifications = ({ navigation }) => {
     return (
         <CustomBackground>
             <Box px={5} pt={5} >
-                <CommonHeading label={'Notifications'} goBack={()=>navigation.goBack()}/>
+                <CommonHeading label={'Notifications'}  goBack={()=>navigation.goBack()}/>
       
                     <FlatList 
                         data={notifications}
                         keyExtractor={(item) => item._id}
                         renderItem={renderItems}
                         showsVerticalScrollIndicator={false}
-                        h={'90%'}
                     />
             </Box>
 

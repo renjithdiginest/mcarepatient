@@ -1,5 +1,5 @@
 import { StyleSheet, View, useWindowDimensions } from 'react-native'
-import React from 'react'
+import React, { memo } from 'react'
 import { HStack, Box, Text, Modal } from 'native-base'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
@@ -14,6 +14,6 @@ const CommonModal = ({isOpen, label, onClose, gotoNext, children, width, pb }) =
     )
 }
 
-export default CommonModal
+export default memo(CommonModal) 
 
 const styles = StyleSheet.create({})

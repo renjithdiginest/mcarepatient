@@ -1,15 +1,16 @@
-import { StyleSheet, useWindowDimensions } from 'react-native'
+import { StyleSheet, TouchableOpacity, useWindowDimensions } from 'react-native'
 import React, { memo } from 'react'
 import { HStack, Pressable, Text, Icon, Box } from 'native-base'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
-const CustomButton = ({ label, onPress, selected, wid, h }) => {
+const CustomButton = ({ label, onPress, selected, wid, h, mt, login }) => {
 
   const { width, height } = useWindowDimensions()
 
   return (
-    <Pressable onPress={onPress} >
+    <TouchableOpacity onPress={onPress} >
       <Box
+        mt={mt ? mt : 0}
         width={wid ? wid : width / 3.5}
         style={selected ? styles.tabSelected : styles.tabNotSelected}
         bg={selected ? {
@@ -24,9 +25,10 @@ const CustomButton = ({ label, onPress, selected, wid, h }) => {
         borderRadius={10}
         h={h}
       >
-        <Text style={selected ? styles.selectedText : styles.notSelectedText} fontSize={15} my={3}>{label}</Text>
+        {login ? <Text color={'#057DC1'} fontSize={14} my={3} letterSpacing={1} fontWeight={'bold'}>{label}</Text> : <Text style={selected ? styles.selectedText : styles.notSelectedText} fontSize={15} my={3}>{label}</Text>}
+
       </Box>
-    </Pressable>
+    </TouchableOpacity>
 
   )
 }
@@ -47,6 +49,7 @@ const styles = StyleSheet.create({
   selectedText: {
     fontWeight: '600',
     color: '#fff',
+
 
   },
   notSelectedText: {

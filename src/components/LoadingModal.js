@@ -1,5 +1,5 @@
 import { StyleSheet, View, useWindowDimensions } from 'react-native'
-import React from 'react'
+import React, { memo } from 'react'
 import { HStack, Box, Modal, Spinner } from 'native-base'
 
 const LoadingModal = ({isVisible, label, closeModal, gotoNext }) => {
@@ -19,6 +19,6 @@ const LoadingModal = ({isVisible, label, closeModal, gotoNext }) => {
   )
 }
 
-export default LoadingModal
+export default memo(LoadingModal) 
 
 const styles = StyleSheet.create({})

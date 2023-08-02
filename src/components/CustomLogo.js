@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { memo } from 'react'
 import { Image } from 'native-base'
 
 const CustomLogo = ({size, mt}) => {
@@ -11,6 +11,6 @@ const CustomLogo = ({size, mt}) => {
   )
 }
 
-export default CustomLogo
+export default memo(CustomLogo) 
 
 const styles = StyleSheet.create({})

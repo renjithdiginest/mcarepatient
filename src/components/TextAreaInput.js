@@ -1,13 +1,13 @@
 import { StyleSheet } from 'react-native'
-import React from 'react'
+import React, { memo } from 'react'
 import { Box, TextArea, Text } from 'native-base'
 import { Controller } from 'react-hook-form'
 
-const TextAreaInput = ({ placeholder, fieldName, control, error, label, bg, mt, borderRadius,editable }) => {
+const TextAreaInput = ({ placeholder, fieldName, control, error, label, bg, mt, borderRadius ,readonly}) => {
     return (
         <Box mt={mt ? mt : 8}>
             <Text
-                color={'#444444'} fontWeight={700} fontFamily="body" fontSize={17}
+                color={'#444444'} fontWeight={500} fontFamily="body" fontSize={17}
             >{label}</Text>
             <Box alignItems="center"  mt={1} borderRadius={15}
                 bg={bg ? bg : '#E6F4F7'}
@@ -20,7 +20,6 @@ const TextAreaInput = ({ placeholder, fieldName, control, error, label, bg, mt, 
 
                     render={({ field: { onChange, onBlur, value } }) => (
                         <TextArea
-                            editable={editable}
                             bgColor={bg ? bg : '#E6F4F7'}
                             onChangeText={onChange}
                             value={value}
@@ -29,6 +28,7 @@ const TextAreaInput = ({ placeholder, fieldName, control, error, label, bg, mt, 
                             placeholder={placeholder}
                             borderWidth={0}
                             borderRadius={borderRadius}
+                            isReadOnly={readonly}
                         />
                     )}
                     name={fieldName}
@@ -41,6 +41,6 @@ const TextAreaInput = ({ placeholder, fieldName, control, error, label, bg, mt, 
     )
 }
 
-export default TextAreaInput
+export default memo(TextAreaInput) 
 
 const styles = StyleSheet.create({})

@@ -1,12 +1,15 @@
 import { StyleSheet } from 'react-native'
-import React from 'react'
+import React, { memo } from 'react'
 import { Box, CheckIcon, Center, Select, Icon, Text } from 'native-base'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { Controller } from 'react-hook-form'
+import reactotron from 'reactotron-react-native'
 
 
-const CommonSelectInput = ({placeholder, changeValue, selectedValue, options, optlabel, optValue, mt, label, backgroundColor, mb, fieldName, control, error}) => {
+const CommonSelectInput = ({placeholder, changeValue, selectedValue, options, optlabel, optValue, mt, label, backgroundColor, mb, fieldName, control, error,width, children,customweight}) => {
 
+    // reactotron.log({optValue})
+    
     return (
 
         <Box mt={mt} mb={mb}>
@@ -16,21 +19,19 @@ const CommonSelectInput = ({placeholder, changeValue, selectedValue, options, op
                 mb={.5} >{label}</Text>
                 <Controller
                     control={control}
-                    rules={{
-                        required: true,
-                    }}
                     render={({ field: { onChange, onBlur, value } }) => (
                         <Select 
+                            width={width}
                             borderWidth={0}
                             mt={1}
                             borderRadius={15}
                             selectedValue={selectedValue}  
-                            accessibilityLabel={placeholder}
-                            // placeholder={placeholder} 
+                            accessibilityLabel={"placeholder"}
+                            placeholder={placeholder} 
                             placeholderTextColor={'gray.400'}
                             backgroundColor={backgroundColor ? backgroundColor:'#E6F4F7'}
                             fontSize={13}
-                            fontWeight={600}
+                            fontWeight={customweight ? customweight :600 }
                             _selectedItem={{
                                 bg: "gray.300",
                                 endIcon: <CheckIcon size="1"  />
@@ -56,7 +57,7 @@ const CommonSelectInput = ({placeholder, changeValue, selectedValue, options, op
                                 </Box>
                             }
                         >
-                            {options && options.map((opt, index) => (
+                            {children ? children :options && options.map((opt, index) => (
                                 <Select.Item key={index} label={opt[optlabel]} value={opt[optValue]} />
                             ))}
                         </Select>
@@ -64,13 +65,13 @@ const CommonSelectInput = ({placeholder, changeValue, selectedValue, options, op
                     name={fieldName}
                 />
             </Box>
-        {error && <Text fontFamily={"body"} fontWeight="bold" color={"red.500"} ml={2}>{error?.message}</Text>}
+        {error && <Text fontFamily={"Quicksand"} fontWeight={customweight ? customweight : '600'} fontSize={12} color={"red.500"} ml={2}>{error?.message}</Text>}
 
             
         </Box>
     )
 }
 
-export default CommonSelectInput
+export default memo(CommonSelectInput) 
 
 const styles = StyleSheet.create({})

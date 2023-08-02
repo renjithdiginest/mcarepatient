@@ -11,6 +11,7 @@ import {
 import { RESET_AUTH } from './constants/authConstants'
 import { profileReducer } from './reducers/profileReducer'
 import { homeReducer } from './reducers/homeReducer'
+import { consultationReducer } from './reducers/consultationReducer'
 
 
 
@@ -18,7 +19,8 @@ import { homeReducer } from './reducers/homeReducer'
 const reducer = combineReducers({
     auth: authReducer,
     profile: profileReducer,
-    home: homeReducer 
+    home: homeReducer,
+    consultation:consultationReducer 
 })
 
 const rootReducer = (state, action) => {

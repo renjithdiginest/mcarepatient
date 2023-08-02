@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import PDFView from 'react-native-view-pdf';
+import reactotron from 'reactotron-react-native';
 import CustomBackground from '../components/CustomBackground';
 import CommonHeading from '../components/CommonHeading';
 import { Box } from 'native-base';

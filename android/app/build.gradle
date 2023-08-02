@@ -74,7 +74,7 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.diginest.doctorapp"
+    namespace "com.diginest.mcarepatient"
 
     packagingOptions {
         // TODO: workaround of the shared lib issue(https://github.com/facebook/react-native/issues/29377).
@@ -85,7 +85,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.diginest.doctorapp"
+        applicationId "com.diginest.mcarepatient"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

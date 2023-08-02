@@ -1,5 +1,6 @@
-import { memo } from "react";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import React, { memo } from 'react'
+
 const CustomBackground = ({children}) => {
 
 
