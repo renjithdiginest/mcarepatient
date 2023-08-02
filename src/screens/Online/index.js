@@ -203,7 +203,7 @@ const Online = () => {
                                 }
                             }}
                         >
-                            <Icon as={<Ionicons />} name={"ios-filter"} color={'#ffff'} size={5} m={4} />
+                            <Icon as={<Ionicons />} name={"filter"} color={'#ffff'} size={5} m={4} />
                         </Box>
                     </Pressable>
                 </HStack>

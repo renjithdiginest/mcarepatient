@@ -1085,21 +1085,21 @@ export function CallScreen({navigation, route}: CallScreenProps) {
                 name={isMuted ? 'unmute' : 'mute'}
                 onPress={onPressAudio}
               />
-              <Icon
+              {/* <Icon
                 containerStyle={styles.controlButton}
                 name={isSharing ? 'shareOff' : 'shareOn'}
                 onPress={onPressShare}
-              />
+              /> */}
               <Icon
                 containerStyle={styles.controlButton}
                 name={isVideoOn ? 'videoOff' : 'videoOn'}
                 onPress={onPressVideo}
               />
-              <Icon
+              {/* <Icon
                 containerStyle={styles.controlButton}
                 name="more"
                 onPress={onPressMore}
-              />
+              /> */}
             </View>
           </View>
         </Animated.View>
